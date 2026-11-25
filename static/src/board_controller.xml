@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Madooit
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<templates xml:space="preserve">
+    <t
+        t-name="board_interval.BoardContent"
+        t-inherit="board.Content"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//div[hasclass('o-dashboard-header')]" position="inside">
+            <div
+                class="o_board_interval order-first d-flex align-items-center gap-2 me-auto"
+            >
+                <label
+                    class="form-label mb-0 text-nowrap"
+                    for="board_interval_date_from"
+                >Start Date</label>
+                <input
+                    id="board_interval_date_from"
+                    type="date"
+                    class="form-control form-control-sm o_board_interval_input"
+                    t-att-value="boardInterval.dateFrom"
+                    t-on-change="(ev) => this.onIntervalChange(ev, 'dateFrom')"
+                />
+                <label
+                    class="form-label mb-0 text-nowrap"
+                    for="board_interval_date_to"
+                >End Date</label>
+                <input
+                    id="board_interval_date_to"
+                    type="date"
+                    class="form-control form-control-sm o_board_interval_input"
+                    t-att-value="boardInterval.dateTo"
+                    t-on-change="(ev) => this.onIntervalChange(ev, 'dateTo')"
+                />
+                <button
+                    type="button"
+                    class="btn btn-link btn-sm text-nowrap"
+                    t-if="boardInterval.dateFrom or boardInterval.dateTo"
+                    t-on-click="() => this.clearInterval()"
+                >Clear</button>
+            </div>
+        </xpath>
+        <xpath expr="//BoardAction" position="attributes">
+            <attribute name="t-key">action.id + '-' + boardInterval.revision</attribute>
+        </xpath>
+    </t>
+</templates>
